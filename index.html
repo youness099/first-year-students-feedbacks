@@ -1046,6 +1046,15 @@
         };
     </script>
 </body>
-  <form action="https://formspree.io/f/xrbyyjwo" method="POST">
-  </form>
+
+        <form id="feedbackForm" action="https://formspree.io/f/xrbyyjwo" method="POST" autocomplete="off">
+            <label for="problem"><i class="fa-solid fa-question-circle"></i> What's the problem you're facing?</label>
+            <textarea id="problem" name="problem" rows="5" required></textarea>
+            <label for="name"><i class="fa-solid fa-user"></i> Your full Name (optional):</label>
+            <input type="text" id="name" name="name">
+            <label for="email"><i class="fa-solid fa-envelope"></i> Your Email (optional):</label>
+            <input type="email" id="email" name="email">
+            <button type="submit"><i class="fa-solid fa-paper-plane"></i> Submit Feedback</button>
+        </form>
 </html>
+
