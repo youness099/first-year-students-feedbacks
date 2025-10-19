@@ -868,7 +868,7 @@
                 <p class="subtitle">Share your experiences as a first-year student. Your voice matters and will help us understand the challenges you face.</p>
             </div>
 
-            <form id="mainForm">
+            <form id="feedbackForm" action="https://formspree.io/f/xrbyyjwo" method="POST" autocomplete="off">
                 <div class="form-group">
                     <label>Name <span class="optional">(optional)</span></label>
                     <div class="input-wrapper">
@@ -894,10 +894,8 @@
                     <div class="progress-bar" id="progressBar"></div>
                     <div class="char-count" id="charCount">0 characters</div>
                 </div>
-           
-        </form>
+
                 <button type="submit"><span>Submit Feedback</span></button>
-                
             </form>
 
             <div class="footer">
@@ -1046,41 +1044,6 @@
             a.click();
             URL.revokeObjectURL(url);
         };
-        </p>
-        <form id="feedbackForm" action="https://formspree.io/f/xrbyyjwo" method="POST" autocomplete="off">
-        </form>
-        <div id="thankYou">
-            <h2><i class="fa-solid fa-heart"></i> Thank you for your feedback!</h2>
-        </div>
-    </div>
-    <script>
-    // Hide thank you message by default
-    document.getElementById('thankYou').style.display = 'none';
-
-    document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const form = e.target;
-        const data = new FormData(form);
-
-        // Send the form data to Formspree
-        const response = await fetch(form.action, {
-            method: form.method,
-            body: data,
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-
-        if (response.ok) {
-            form.style.display = 'none';
-            const thankYou = document.getElementById('thankYou');
-            thankYou.style.display = 'block';
-            setTimeout(() => { thankYou.classList.add('show'); }, 100); // trigger fade-in
-        } else {
-            alert('There was a problem submitting your feedback. Please try again.');
-        }
-    });
     </script>
 </body>
 </html>
-
