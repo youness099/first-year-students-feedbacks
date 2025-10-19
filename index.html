@@ -1045,8 +1045,34 @@
             URL.revokeObjectURL(url);
         };
     </script>
+    
+    <script>
+    // Hide thank you message by default
+    document.getElementById('thankYou').style.display = 'none';
+
+    document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+
+        // Send the form data to Formspree
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            form.style.display = 'none';
+            const thankYou = document.getElementById('thankYou');
+            thankYou.style.display = 'block';
+            setTimeout(() => { thankYou.classList.add('show'); }, 100); // trigger fade-in
+        } else {
+            alert('There was a problem submitting your feedback. Please try again.');
+        }
+    });
+    </script>
 </body>
 </html>
-
-
-
