@@ -1,125 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Year Student Feedback</title>
-    <style>
-        /* ------------------------- CSS كما في كودك الأصلي ------------------------- */
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(-45deg, #ffdee9, #b5deff, #dfe9f3, #ede7f6, #fce4ec, #e0f2f7);
-            background-size: 400% 400%;
-            animation: gradientShift 25s ease infinite;
-            min-height: 100vh;
-            padding: 40px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow-x: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Year Student Feedback</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: linear-gradient(-45deg, #ffdee9, #b5deff, #dfe9f3, #ede7f6, #fce4ec, #e0f2f7);
+        background-size: 400% 400%;
+        animation: gradientShift 25s ease infinite;
+        min-height:100vh;
+        padding:40px 20px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        position:relative;
+        overflow-x:hidden;
+    }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    @keyframes gradientShift {
+        0% { background-position:0% 50%; }
+        50% { background-position:100% 50%; }
+        100% { background-position:0% 50%; }
+    }
 
-        .container { max-width: 750px; width: 100%; position: relative; z-index: 2; }
-        .card {
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(50px) saturate(200%);
-            border-radius: 44px;
-            padding: 65px;
-            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.12),
-                        0 0 0 1px rgba(255, 255, 255, 0.8) inset,
-                        0 0 80px rgba(167, 199, 231, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
+    .grid-bg {
+        position: fixed;
+        top: 0; left:0; width:100%; height:100%;
+        background-image: 
+            linear-gradient(rgba(167,199,231,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(167,199,231,0.03) 1px, transparent 1px);
+        background-size:50px 50px;
+        animation: gridMove 20s linear infinite;
+        pointer-events:none;
+        z-index:1;
+    }
 
-        h1 { font-size: 52px; font-weight: 900; margin-bottom: 18px; }
+    @keyframes gridMove { 0%{transform:translate(0,0);} 100%{transform:translate(50px,50px);} }
 
-        .form-group { margin-bottom: 38px; position: relative; }
-        label { display:block; margin-bottom:16px; font-weight:700; font-size:17px; }
-        input, textarea {
-            width:100%; padding:22px 24px; border:3px solid #e2e8f0; border-radius:22px;
-            font-size:17px; font-family:inherit; background:#fff;
-        }
-        textarea { resize: vertical; min-height:200px; line-height:1.9; }
+    .particles { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+    .particle { position:absolute; width:4px; height:4px; background:white; border-radius:50%; opacity:0; animation:particleRise 10s infinite ease-in; box-shadow:0 0 10px rgba(255,255,255,0.5); }
+    @keyframes particleRise {
+        0% {opacity:0; transform:translateY(0) translateX(0) scale(0);}
+        10% {opacity:1;}
+        90% {opacity:1;}
+        100% {opacity:0; transform:translateY(-120vh) translateX(100px) scale(1.5);}
+    }
 
-        button {
-            background: linear-gradient(135deg, #a7c7e7, #8ec5fc, #c4b5fd, #ffdee9);
-            color: #1a202c; border:none; padding:24px 50px; border-radius:22px;
-            font-size:18px; font-weight:800; cursor:pointer; width:100%; margin-top:25px;
-        }
+    .floating-shapes { position: fixed; width:100%; height:100%; top:0; left:0; pointer-events:none; overflow:hidden; z-index:1; }
+    .shape { position:absolute; opacity:0.1; animation:floatShape 30s infinite ease-in-out; filter:blur(3px); }
+    .shape:nth-child(1){width:120px;height:120px;background:linear-gradient(135deg,#a7c7e7,#8ec5fc);border-radius:30% 70% 70% 30% / 30% 30% 70% 70%;top:5%;left:5%;animation-delay:0s;}
+    .shape:nth-child(2){width:180px;height:180px;background:linear-gradient(135deg,#ffdee9,#ffb7d5);border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;top:55%;right:5%;animation-delay:5s;}
+    .shape:nth-child(3){width:140px;height:140px;background:linear-gradient(135deg,#c4b5fd,#a78bfa);border-radius:40% 60% 60% 40% / 60% 40% 60% 40%;bottom:10%;left:10%;animation-delay:10s;}
+    .shape:nth-child(4){width:100px;height:100px;background:linear-gradient(135deg,#81e6d9,#68d391);border-radius:50% 50% 30% 70% / 50% 50% 70% 30%;top:25%;right:20%;animation-delay:15s;}
+    .shape:nth-child(5){width:160px;height:160px;background:linear-gradient(135deg,#feca57,#ff9ff3);border-radius:70% 30% 50% 50% / 30% 60% 40% 70%;top:70%;left:40%;animation-delay:20s;}
+    @keyframes floatShape{
+        0%,100%{transform:translate(0,0) rotate(0deg) scale(1);}
+        20%{transform:translate(50px,-70px) rotate(72deg) scale(1.2);}
+        40%{transform:translate(-40px,50px) rotate(144deg) scale(0.8);}
+        60%{transform:translate(60px,30px) rotate(216deg) scale(1.1);}
+        80%{transform:translate(-30px,-40px) rotate(288deg) scale(0.9);}
+    }
 
-        .success-message {
-            background: linear-gradient(135deg, #81e6d9 0%, #68d391 40%, #4fd1c5 100%);
-            color: #1a202c; padding:36px; border-radius:32px; margin-bottom:45px;
-            display:none; text-align:center; font-weight:600;
-        }
-    </style>
+    .container{max-width:750px;width:100%;position:relative;z-index:2;}
+    .card{background:rgba(255,255,255,0.97);backdrop-filter:blur(50px) saturate(200%);border-radius:44px;padding:65px;position:relative;overflow:hidden;box-shadow:0 50px 120px rgba(0,0,0,0.12),0 0 0 1px rgba(255,255,255,0.8) inset,0 0 80px rgba(167,199,231,0.2);}
+    h1{color:#1a202c;margin-bottom:18px;font-size:52px;font-weight:900;letter-spacing:-2px;position:relative;}
+
+    input, textarea{width:100%;padding:22px 24px;border:3px solid #e2e8f0;border-radius:22px;font-size:17px;font-family:inherit;background:#fff;}
+    textarea{resize:vertical; min-height:200px; line-height:1.9;}
+    button{background:linear-gradient(135deg,#a7c7e7,#8ec5fc,#c4b5fd,#ffdee9);color:#1a202c;border:none;padding:24px 50px;border-radius:22px;font-size:18px;font-weight:800;cursor:pointer;width:100%;margin-top:25px;}
+
+    .success-message{background:linear-gradient(135deg,#81e6d9 0%,#68d391 40%,#4fd1c5 100%);color:#1a202c;padding:36px;border-radius:32px;margin-bottom:45px;display:none;text-align:center;font-weight:600;}
+
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="success-message" id="successMessage">
-            <span style="font-size:72px;">✓</span>
-            <div style="font-size:26px; font-weight:900;">Thank You!</div>
-            <div style="font-size:17px;">Your feedback has been submitted successfully.</div>
-        </div>
+<div class="grid-bg"></div>
+<div class="particles" id="particles"></div>
+<div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
 
-        <div class="card">
-            <h1>Student Feedback</h1>
-            <p>Share your experiences as a first-year student. Your voice matters.</p>
-
-            <form id="feedbackForm" action="https://formspree.io/f/xrbyyjwo" method="POST" autocomplete="off">
-                <div class="form-group">
-                    <label>Name <span style="font-weight:400; font-style:italic;">(optional)</span></label>
-                    <input type="text" name="name" placeholder="Your name or leave blank">
-                </div>
-
-                <div class="form-group">
-                    <label>Email <span style="font-weight:400; font-style:italic;">(optional)</span></label>
-                    <input type="email" name="email" placeholder="your.email@university.edu">
-                </div>
-
-                <div class="form-group">
-                    <label>What problems or challenges are you facing? <span style="color:#a7c7e7;">*</span></label>
-                    <textarea name="message" required placeholder="Tell us about the challenges..."></textarea>
-                </div>
-
-                <button type="submit">Submit Feedback</button>
-            </form>
-        </div>
+<div class="container">
+    <div class="success-message" id="successMessage">
+        <span style="font-size:72px;">✓</span>
+        <div style="font-size:26px; font-weight:900;">Thank You!</div>
+        <div style="font-size:17px;">Your feedback has been submitted successfully.</div>
     </div>
 
-    <script>
-        // Formspree submission
-        document.getElementById('feedbackForm').addEventListener('submit', async function(e){
-            e.preventDefault();
-            const form = e.target;
-            const data = new FormData(form);
+    <div class="card">
+        <h1>Student Feedback</h1>
+        <p>Share your experiences as a first-year student. Your voice matters.</p>
 
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
-                });
+        <form id="feedbackForm" action="https://formspree.io/f/xrbyyjwo" method="POST" autocomplete="off">
+            <div class="form-group">
+                <label>Name <span style="font-weight:400;font-style:italic;">(optional)</span></label>
+                <input type="text" id="studentName" name="name" placeholder="Your name or leave blank">
+            </div>
+            <div class="form-group">
+                <label>Email <span style="font-weight:400;font-style:italic;">(optional)</span></label>
+                <input type="email" id="studentEmail" name="email" placeholder="your.email@university.edu">
+            </div>
+            <div class="form-group">
+                <label>What problems or challenges are you facing? <span style="color:#a7c7e7;">*</span></label>
+                <textarea id="problem" name="message" required placeholder="Tell us about the challenges..."></textarea>
+            </div>
+            <button type="submit"><span>Submit Feedback</span></button>
+        </form>
+    </div>
+</div>
 
-                if (response.ok) {
-                    form.style.display = 'none';
-                    document.getElementById('successMessage').style.display = 'block';
-                } else {
-                    alert('There was a problem submitting your feedback. Please try again.');
-                }
-            } catch(err) {
-                alert('Network error: Could not submit form.');
-            }
-        });
-    </script>
-</body>
-</html>
+<script>
+    // Particles
+    const particlesContainer = document.getElementById('particles');
+    for(let i=0;i<50;i++){
+        const particle = document.createElement('div');
+        particle.className='particle';
+        particle.style.left=Math.random()*100+'%';
+        particle.style.bottom='-10px';
+        particle.style.animationDelay=Math.random()*10+'s';
+        particlesContainer.appendChild(particle);
+    }
+
+    // Formspree
+    document.getElementById('feedbackForm').addEventListener('submit', async function(e){
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {'Accept':'application/json'}
+            });
+
+            if(response.ok){
+                form.style.display='none';
+                document.getElementById('successMessage').style.display='block';
+            }else{
+                alert('There was a problem submitting your feedback. Please try again.');
+           
